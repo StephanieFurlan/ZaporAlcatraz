@@ -9,17 +9,7 @@ def v_slovarje(seznam):
     ''' Funkcija vrne seznam slovarjev '''
     return [dict(row) for row in seznam]
 
-def je_prestopno(leto):
-    '''Funkcija vrne True ali False glede na to ce je leto
-       prestopno.'''
-    if leto % 4 == 0:
-        if leto % 100 == 0:
-            if leto % 400 == 0:
-                return True
-            return False
-        return True
-    return False
-                        
+  
 def koliko_dni(zapornik):
     datum = datum_aretiranja(zapornik)
     sql = '''
@@ -36,4 +26,47 @@ def datum_aretiranja(zapornik):
           WHERE zlocinec = ?
           '''
     return con.execute(sql, [zapornik]).fetchone()['zadnji']
+
+def kdaj_iz_zapora(zapornik):
+    ''' Funkcija vrne datum, ko bo zapornik šel iz zapora'''
+    slovar = {1: 31 , 2: 28, 3 : 31, 4:30, 5:31, 6:30,
+            7:31, 8:31, 9: 30, 10: 31, 11:30, 12:31}
+    
+    stDni = koliko_dni(zapornik)
+    datum = datum_aretiranja(zapornik).split('-')
+    dan = int(datum[2])
+    mesec = int(datum[1])
+    leto = int(datum[0])
+    # dodamo leta
+    while stDni > 364:
+        leto += 1
+        stDni -= 365
+    # dodamo mesece in dni
+    treMesec = mesec
+    treDan = dan
+    while stDni != 0:
+        vTemMesecu = slovar[treMesec]
+        vTaMesec = vTemMesecu - treDan
+        if vTaMesec <= stDni:
+            # torej bomo skočili na naslendji mesec
+            treDan = 0
+            if treMesec == 12:
+                treMesec = 1
+                leto += 1
+            else:
+                treMesec += 1
+            stDni -= vTaMesec 
+        else:
+            treDan += stDni
+            stDni = 0
+    if treDan <= 9:
+        treDan = '0' + str(treDan)
+    else:
+        treDan = str(treDan)
+    if treMesec <= 9:
+        treMesec = '0' + str(treMesec)
+    else:
+        treMesec = str(treMesec)
+    return print(leto,'-', treMesec, '-', treDan)
+                
         
