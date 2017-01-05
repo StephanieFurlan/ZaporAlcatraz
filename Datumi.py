@@ -69,4 +69,74 @@ def kdaj_iz_zapora(zapornik):
         treMesec = str(treMesec)
     return print(leto,'-', treMesec, '-', treDan)
                 
-        
+def poglej_zlocine(zapornik):
+    '''funkcija vrne seznam zločin, ki jih je zapornik naredil'''
+    sezZlocin = []
+    sql = '''SELECT DISTINCT vrsta_zlocin AS vrsta
+             FROM zlocin
+             WHERE zlocinec = ?
+          '''
+    return v_slovarje(con.execute(sql, [zapornik]))
+
+def kdo_je_v_celici(st_celice):
+    ''' funkcija vrne id-je tistih, ki spijo z zapornikom'''
+    sql = '''SELECT id      
+             FROM osebe
+             WHERE celica = ?        
+            '''
+    return v_slovarje(con.execute(sql, [st_celice]))
+
+def proste_moske_celice():
+    '''vrne seznam tistih celic, ki imajo se kako prosto mesto'''
+    sql = ''' SELECT st_celice
+              FROM celica
+              WHERE velikost - (
+                      SELECT count(celica) 
+                        FROM OSEBE
+                       WHERE celica = st_celice
+                  ) > 0
+              AND tip LIKE 'M' '''
+    return v_slovarje(con.execute(sql))
+       
+def proste_zenske_celice():
+    '''vrne seznam tistih celic, ki imajo se kako prosto mesto'''
+    sql = ''' SELECT st_celice
+              FROM celica
+              WHERE velikost - (
+                      SELECT count(celica) 
+                        FROM OSEBE
+                       WHERE celica = st_celice
+                  ) > 0
+              AND tip LIKE 'F' '''
+    return v_slovarje(con.execute(sql))
+
+def prosta_dela():
+    SELECT delavec,
+       kaj_dela,
+       stevilo_ur,
+       stevilo_ur * (
+                        SELECT urna_postavka
+                          FROM vrsta_dela
+                         WHERE id = kaj_dela
+                    )
+       AS delano,
+       (
+           SELECT denarna_kazen
+             FROM zlocin
+            WHERE zlocinec = delavec
+       )
+       AS cena
+  FROM delo
+ WHERE cena > delano
+ ORDER BY delavec;
+
+SELECT kaj_dela,
+       (
+           SELECT stevilo_mest
+             FROM vrsta_dela
+            WHERE id = kaj_dela
+       )
+-      count(kaj_dela) 
+  FROM delo
+ GROUP BY kaj_dela;
+
