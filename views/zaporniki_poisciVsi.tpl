@@ -10,11 +10,11 @@
  <div class="col s4">
  <div class = "collection">
      <a href ="http://127.0.0.1:8080/zaporniki/poisci/" class="black-text collection-item active"> Poišči zapornika </a> 
-     <a href ="http://127.0.0.1:8080/zaporniki/kazniva_dejanja/" class="black-text collection-item "> Kazniva dejanja zapornika </a> 
+     <a href ="http://127.0.0.1:8080/zaporniki/kazniva_dejanja/" class="black-text collection-item "> Kazniva dejanja zapornika </a>
 	 <a href ="http://127.0.0.1:8080/zaporniki/finance/" class="black-text collection-item"> Finance zapornika</a> 
-     <a href ="http://127.0.0.1:8080/zaporniki/delo/" class="black-text collection-item"> Delo zapornika </a> 
-	 <a href ="http://127.0.0.1:8080/zaporniki/dodaj/" class="black-text collection-item"> Dodaj zapornika </a>
-	 <a href ="http://127.0.0.1:8080/zaporniki/dodaj_kazen/" class="black-text collection-item"> Dodaj kazen</a> 	 
+     <a href ="http://127.0.0.1:8080/zaporniki/delo/" class="black-text collection-item"> Delo zapornika </a> 	 
+	 <a href ="http://127.0.0.1:8080/zaporniki/dodaj/" class="black-text collection-item "> Dodaj zapornika </a> 
+	 <a href ="http://127.0.0.1:8080/zaporniki/dodaj_kazen/" class="black-text collection-item"> Dodaj kazen</a> 
  </div>
  </div>
  <div class = "col s8">
@@ -55,10 +55,30 @@
 		</p>
 		<br>
 		<br>
-		<br>
 		<button class="btn waves-effect waves-light" type = "submit" > Poišči </button>
 	</form>
 	<br>
 	<br>
+	<br>
+    <table>
+        <thead>
+          <tr>
+              <th>Ime</th>
+              <th>Priimek</th>
+              <th>Datum rojstva</th>
+			  <th>Spol</th>
+          </tr>
+        </thead>
+		<tbody>
+		%for (ime, priimek, datum, spol) in zaporniki:
+			<tr>
+				<td>{{ime}}</td>
+				<td>{{priimek}}</td>
+				<td>{{datum}}</td>
+				<td>{{spol}}</td>
+            </tr>
+		%end
+		</tbody>
+	</table>	
  </div>
 </div>

@@ -23,7 +23,7 @@
   </div>
   <div class="col s4 4">
     <div class = "center">
-    <a href = "http://127.0.0.1:8080/celice/">
+    <a href = "http://127.0.0.1:8080/celice/poisci/">
        <h1 class = "center teal-text">
          <i class = "material-icons large" >view_column</i>
        </h1>
@@ -34,7 +34,7 @@
   </div>
   <div class="col s4 4">
     <div class = "center">
-<a href = "http://127.0.0.1:8080/celice/">
+<a href = "http://127.0.0.1:8080/delo/prosto/">
        <h1 class = "center teal-text">
          <i class = "material-icons large" >check_box</i>
        </h1>
