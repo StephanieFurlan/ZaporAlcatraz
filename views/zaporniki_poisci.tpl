@@ -18,7 +18,23 @@
  </div>
  </div>
  <div class = "col s8">
-  <p>Poišči zapornika tako, da vneses njegov ID.</p>
+ 	<br>
+	%if ime == None:
+		%if vnos!="":
+			<p> Zapornik z id-jem <b>{{vnos}}</b> ne obstaja. </p>
+		%end
+	%else:
+	   <ul class="collection">
+		 <li class="collection-item"><big><b>Ime:   </b>{{ime}}</big></li>
+		 <li class="collection-item"><big><b>Priimek:   </b>{{priimek}}</big></li>
+		 <li class="collection-item"><big><b>Datum rojstva:   </b>{{datum_rojstva}}</big></li>
+		 <li class="collection-item"><big><b>Spol:   </b>{{spol}}</big></li>
+		 <li class="collection-item"><big><b>Celica:   </b>{{celica}}</big></li>
+	   </ul>
+	    <br>
+		<br>
+		<br>
+	%end
   <br>
   <form action = "/zaporniki/poisci/">
    <div class="input-field">
@@ -58,19 +74,5 @@
 		<button class="btn waves-effect waves-light" type = "submit" > Poišči </button>
 	</form>
 	<br>
-	<br>
-%if ime == None:
-	%if vnos!="":
-		<p> Zapornik z id-jem <b>{{vnos}}</b> ne obstaja. </p>
-	%end
-%else:
-   <ul class="collection">
-     <li class="collection-item"><big><b>Ime:   </b>{{ime}}</big></li>
-     <li class="collection-item"><big><b>Priimek:   </b>{{priimek}}</big></li>
-     <li class="collection-item"><big><b>Datum rojstva:   </b>{{datum_rojstva}}</big></li>
-     <li class="collection-item"><big><b>Spol:   </b>{{spol}}</big></li>
-     <li class="collection-item"><big><b>Celica:   </b>{{celica}}</big></li>
-   </ul>
-%end
  </div>
 </div>

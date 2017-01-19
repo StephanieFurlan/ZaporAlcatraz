@@ -37,7 +37,7 @@ def zaporniki_kazniva_dejanja():
     vnos = str(request.query.id_zapornika)
     try:
         id_zapornika = int(vnos)
-        if 0 < id_zapornika <= int(modeli.max_id_zapornika()):
+        if modeli.id_je_v_bazi(id_zapornika):
             return template('zaporniki_kazniva_dejanja', kazni = modeli.vse_kazni(id_zapornika))
         else:
             return template('zaporniki_kazniva_dejanja', vnos = vnos, kazni = None)
@@ -49,7 +49,7 @@ def zaporniki_finance():
     vnos = str(request.query.id_zapornika)
     try:
         id_zapornika = int(vnos)
-        if 0 < id_zapornika <= int(modeli.max_id_zapornika()):
+        if modeli.id_je_v_bazi(id_zapornika):
             return template('zaporniki_finance', delo = modeli.zasluzki_zapornika(id_zapornika), zasluzek = modeli.zasluzki_pred_po_arestu(id_zapornika), dolzanPo = modeli.dolzan(id_zapornika), dolzanPred = modeli.dolzan_pred_arestom(id_zapornika))
         else:
             return template('zaporniki_finance', vnos = vnos, delo  = None )
@@ -61,7 +61,7 @@ def zaporniki_delo():
     vnos = str(request.query.id_zapornika)
     try:
         id_zapornika = int(vnos)
-        if 0 < id_zapornika <= int(modeli.max_id_zapornika()):
+        if modeli.id_je_v_bazi(id_zapornika):
             return template('zaporniki_delo', delo = modeli.zasluzki_zapornika(id_zapornika))
         else:
             return template('zaporniki_delo', vnos = vnos, delo  = None )
@@ -158,12 +158,12 @@ def delo_prosto_submit():
         pass
     redirect('/delo/prosto/')
 
-@route('/delo/zgodovina/')
-def delo_zgodovina():
-    return template('delo_zgodovina', zgodovina = None)
+##@route('/delo/zgodovina/')
+##def delo_zgodovina():
+##    return template('delo_zgodovina', zgodovina = None)
 
-@get('/delo/zgodovina/')
+@route('/delo/zgodovina/')
 def delo_zgodovina_submit():
-    return template('delo_zgodovina', zgodovina = modeli.preteklo_delo(str(request.query.zacetek), str(request.query.id_zapornika)) )
+    return template('delo_zgodovina', zgodovina = modeli.preteklo_delo(str(request.query.zacetek), str(request.query.konec)) )
 
 run(debug = True, refresh = True)  

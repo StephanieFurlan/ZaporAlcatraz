@@ -18,6 +18,27 @@
  </div>
  </div>
  <div class = "col s8">
+ <br>
+    <table>
+        <thead>
+          <tr>
+              <th>Ime</th>
+              <th>Priimek</th>
+              <th>Datum rojstva</th>
+			  <th>Spol</th>
+          </tr>
+        </thead>
+		<tbody>
+		%for (ime, priimek, datum, spol) in zaporniki:
+			<tr>
+				<td>{{ime}}</td>
+				<td>{{priimek}}</td>
+				<td>{{datum}}</td>
+				<td>{{spol}}</td>
+            </tr>
+		%end
+		</tbody>
+	</table>
   <p>Poišči zapornika tako, da vneses njegov ID.</p>
   <br>
   <form action = "/zaporniki/poisci/">
@@ -59,26 +80,6 @@
 	</form>
 	<br>
 	<br>
-	<br>
-    <table>
-        <thead>
-          <tr>
-              <th>Ime</th>
-              <th>Priimek</th>
-              <th>Datum rojstva</th>
-			  <th>Spol</th>
-          </tr>
-        </thead>
-		<tbody>
-		%for (ime, priimek, datum, spol) in zaporniki:
-			<tr>
-				<td>{{ime}}</td>
-				<td>{{priimek}}</td>
-				<td>{{datum}}</td>
-				<td>{{spol}}</td>
-            </tr>
-		%end
-		</tbody>
-	</table>	
+		
  </div>
 </div>
