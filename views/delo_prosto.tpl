@@ -48,13 +48,10 @@
 		<div class="input-field">
 			<select name ="delo" id ="delo" type = "text" >
 				<option value="" disabled selected>Vrsta dela</option>
-				<option value="kuhar">Kuhar/ica</option>
-				<option value="pleskar">Pleskar/ka</option>
-				<option value="cistilec">Čistilec/ka</option>
-				<option value="knjiznicar">Knjižničar/ka</option>
-				<option value="mizar">Mizar/ka</option>
-				<option value="vrtnar">Vrtnar/ka</option>
-				<option value="pralec">Pralec/ka</option>
+				%slovarDel = {"kuhar" :"Kuhar/ica", "pleskar" :"Pleskar/ka" , "cistilec" : "Čistilec/ka", "knjiznicar" : "Knjižničar/ka", "mizar" :"Mizar/ka", "vrtnar" : "Vrtnar/ka", "pralec" : "Pralec/ka"}
+			%for (delo, st) in zip(vsa_prosta.keys(), vsa_prosta.values()):
+				<option value="{{delo}}">{{slovarDel[delo]}}</option>
+			%end
 			</select>
 			<label>Vrsta dela</label>
 		</div>

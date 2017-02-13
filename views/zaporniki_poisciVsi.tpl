@@ -22,6 +22,7 @@
     <table>
         <thead>
           <tr>
+			  <th>ID</th>
               <th>Ime</th>
               <th>Priimek</th>
               <th>Datum rojstva</th>
@@ -29,8 +30,9 @@
           </tr>
         </thead>
 		<tbody>
-		%for (ime, priimek, datum, spol) in zaporniki:
+		%for ( id, ime, priimek, datum, spol) in zaporniki:
 			<tr>
+				<td> {{id}}</td>
 				<td>{{ime}}</td>
 				<td>{{priimek}}</td>
 				<td>{{datum}}</td>

@@ -73,11 +73,11 @@ def poisci_zapornika(ime, priimek, datum_rojstva, spol):
     if len(datum) == 3:
         datum_rojstva = datum[2] + '/' + datum[1] + '/' + datum[0]
     '''funkcija poisce zapornika z zgornjimi podatki'''
-    sql =''' SELECT ime, priimek, datum_rojstva, spol FROM osebe WHERE ime LIKE ? AND priimek LIKE ?
+    sql =''' SELECT id, ime, priimek, datum_rojstva, spol FROM osebe WHERE ime LIKE ? AND priimek LIKE ?
          AND datum_rojstva LIKE ? AND spol LIKE ? '''
     sezOseb = []
-    for i,p,d,s in con.execute(sql, ['%'+ime+'%', '%'+priimek+'%', '%'+datum_rojstva+'%', '%'+spol+'%']):
-        sezOseb.append([i,p,d,s])
+    for a, i,p,d,s in con.execute(sql, ['%'+ime+'%', '%'+priimek+'%', '%'+datum_rojstva+'%', '%'+spol+'%']):
+        sezOseb.append([a, i,p,d,s])
     return sezOseb
         
 
